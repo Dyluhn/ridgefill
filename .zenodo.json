@@ -1,0 +1,18 @@
+{
+  "title": "RidgeFill: a training-free late-layer cache fill for faster long-prompt prefill (technical note)",
+  "upload_type": "publication",
+  "publication_type": "technicalnote",
+  "publication_date": "2026-10-05",
+  "creators": [
+    {"name": "Dyluhn"},
+    {"name": "tcclaviger"}
+  ],
+  "description": "Technical note. RidgeFill retrofits the Causal Encoder-Decoder idea of DeepSeek-V4.1-Flash (after YOCO) onto existing models without training: a closed-form ridge map from a mid-depth hidden state predicts each later layer's input for prompt tokens, so the later layers only write their caches, while an exact tail and all decoding run the full model. On Qwen3.8-Flash-Next in the radiance engine, the quality mode makes time to first token 2.10x faster at 32K tokens with no measurable perplexity change and full needle recall. The note also reports the fitted map against POP's identity fill on Llama-3.1-8B and Qwen3.5-9B, and where the fill error lives (keys versus values) on each architecture. Each result is labelled with its evidence tier; a preprint with locked-benchmark results follows.",
+  "license": "cc-by-4.0",
+  "keywords": ["KV cache", "prefill", "long context", "layer skipping", "LLM inference", "ridge regression"],
+  "related_identifiers": [
+    {"identifier": "arXiv:2609.19969", "relation": "isDerivedFrom", "scheme": "arxiv"},
+    {"identifier": "arXiv:2405.05254", "relation": "isDerivedFrom", "scheme": "arxiv"},
+    {"identifier": "https://huggingface.co/kishida/Q3-8B-KVA-Projector", "relation": "references", "scheme": "url"}
+  ]
+}
