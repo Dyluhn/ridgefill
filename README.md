@@ -1,6 +1,6 @@
 # RidgeFill: a training-free late-layer cache fill for faster long-prompt prefill
 
-**Technical note, 2026-10-05.** Dyluhn, with tcclaviger. A full preprint with locked-benchmark results follows;
+**Technical note, 2026-10-05.** Dylan Johnston, with Robert P Smith. A full preprint with locked-benchmark results follows;
 this note records the method and the evidence that exists today, each result labelled with how strong it is.
 
 ## Summary
@@ -78,7 +78,7 @@ Setup:
   prefix cache on. Stock radiance is byte-identical run to run, so differences are not engine noise.
 - **Model:** radiance's FP8/IQ4 build of Qwen3.8-Flash-Next
   (`StillDeadcode/qwen3.8-next-flash-fp8-iq4r-moe`).
-- **Projector:** split 24 of 48, int8. It was fitted on tcclaviger's MXFP4/FP8 checkpoint and ported unchanged; a
+- **Projector:** split 24 of 48, int8. It was fitted on Robert P Smith's MXFP4/FP8 checkpoint and ported unchanged; a
   refit on radiance's quantisation matched it within noise. Quality mode keeps 25% of class matches exact.
 - **Tails:** quality T = 2,560, speed T = 2,048.
 - **Timing:** median of 7 warmed requests, two rounds agreeing within 0.3%.
@@ -87,7 +87,7 @@ Setup:
 - **Needles:** 72 chat prompts at 16K and 32K with one fact or the right one of four keys, hidden at 10–85% depth
   inside the approximated part, plus exact-tail controls.
 
-### 2. Qwen3.8-Flash-Next in tcclaviger's vLLM (engine, measured)
+### 2. Qwen3.8-Flash-Next in Robert P Smith's vLLM (engine, measured)
 
 Speed-parity configuration (projector + GDN correction, split 24, T = 2,048): **+2.8% perplexity**
 (+0.027 nats [+0.015, +0.039]) at **1.54x / 1.68x / 1.71x** faster time to first token at 9K / 16K / 32K.
@@ -148,17 +148,17 @@ tail 1,024):
 The preprint runs pre-registered final configurations once on the frozen held-out sets: RULER, LongBench and
 long-document perplexity on Llama-3.1-8B, Qwen3.5-9B and Qwen3-8B. Qwen3-8B is dense with QK-norm, which separates
 QK-norm from the hybrid design. It adds POP's own configuration as a baseline, measured dense-model prefill time,
-and an expanded Flash-Next tier in tcclaviger's engine with its deterministic fix. Code and projectors are released
+and an expanded Flash-Next tier in Robert P Smith's engine with its deterministic fix. Code and projectors are released
 with it.
 
 ## Credits
 
 - **YOCO** and **DeepSeek-V4.1-Flash's Causal Encoder-Decoder** for the design; **kishida** for the first public
   retrofit.
-- **tcclaviger:** the vLLM engine, its KVA integration, and co-authorship.
+- **Robert P Smith (tcclaviger):** the vLLM engine, its KVA integration, and co-authorship.
 - **StillDeadcode:** radiance and the Flash-Next build it serves.
 
-Cite as: Dyluhn and tcclaviger, *RidgeFill: a training-free late-layer cache fill for faster long-prompt prefill*,
+Cite as: Dylan Johnston and Robert P Smith, *RidgeFill: a training-free late-layer cache fill for faster long-prompt prefill*,
 technical note, 2026-10-05.
 
 ---
