@@ -1,5 +1,14 @@
 # RidgeFill: a training-free late-layer cache fill for faster long-prompt prefill
 
+> **Superseded by the paper.** *RidgeFill: Training-Free Late-Layer Cache Fill for Faster Prefill* (Dylan Johnston and
+> Robert P Smith, preprint, 2026, [doi:10.5281/zenodo.23890247](https://doi.org/10.5281/zenodo.23890247)) replaces this
+> note's numbers, which were measured in a different engine under a different protocol. In the paper, time to first
+> token is 1.25 to 1.31× faster on Qwen3.8-27B in llama.cpp (16K to 120K tokens) and 1.50 to 1.60× faster on
+> Qwen3.8-Flash-Next in vLLM (9K to 32K tokens), with the quality cost measured on official benchmarks. The data, code
+> and the scripts that recompute every number are in
+> [Approximate-Science/ridgefill-data](https://github.com/Approximate-Science/ridgefill-data). The note below is kept
+> as it was published on 2026-10-05.
+
 **Technical note, 2026-10-05.** Dylan Johnston, with Robert P Smith. A full preprint with locked-benchmark results follows;
 this note records the method and the evidence that exists today, each result labelled with how strong it is.
 
